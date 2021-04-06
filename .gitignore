@@ -163,6 +163,9 @@ Thumbs.db #thumbnail cache on Windows
 
 # My local settings
 .env
-.firebaseConfig
+.firebaseConfig.js
+firebaseConfig.js
+
+dump.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django

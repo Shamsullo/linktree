@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.shortcuts import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from .managers import CustomUserManager
@@ -17,3 +18,6 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.phone_number
+
+    def get_absolute_url(self):
+        return reverse("profile", kwargs={"pk": self.pk})

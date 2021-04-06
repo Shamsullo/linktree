@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock title %}
+
+{% block content %}
+
+<h2>My Profile Page</h2>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+<div class="container">
+    <form action="{% url 'first_name_update' %}" method="POST" class="is-readonly", id="first_name">
+        <div class="form-group">
+            {% csrf_token %}
+            <label for="first_name_input">Full Name:</label>
+            <input type="text" class="form-control is-disabled" id="first_name_input" placeholder="Name" value="{{user.first_name}}" disabled>
+            <button type="button" class="btn btn-default btn-edit js-edit">Edit</button>
+            <button type="button" class="btn btn-default btn-save js-save" onclick="updateFirstName()">Save</button>
+        </div>
+    </form>
+
+    <form action="{% url 'last_name_update' %}" method="POST" class="is-readonly" id="last_name">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="last_name_input">Last Name:</label>
+            <input type="text" class="form-control is-disabled" id="last_name_input" placeholder="Name" value="{{user.last_name}}" disabled>
+            <button type="button" class="btn btn-default btn-edit js-edit">Edit</button>
+            <button type="button" class="btn btn-default btn-save js-save" onclick="updateLastName()">Save</button>
+        </div>
+    </form>
+
+    <div class="form-group">
+        <label for="phone_number_field">Phone number:</label>
+        <input type="text" class="form-control is-disabled" id="phone_number_field" value="{{user.phone_number}}" disabled>
+        <a href="{% url 'phone-number-change' %}"><button >Change phone number</button></a>
+    </div>
+    <div>
+        <a href="{% url 'password-change' %}"><button>Change password</button></a>
+    </div>
+</div>
+
+<style>
+    form.is-readonly .btn-save {
+      display: none;
+    }
+    form.is-readonly input[disabled], form.is-readonly textarea[disabled] {
+      cursor: text;
+      background-color: #fff;
+      border-color: transparent;
+      outline-color: transparent;
+      box-shadow: none;
+    }
+    form.is-editing .btn-edit {
+      display: none;
+    }
+</style>
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function(){
+        $('.js-edit, .js-save').on('click', function(){
+            var $form = $(this).closest('form');
+            $form.toggleClass('is-readonly is-editing');
+            var isReadonly  = $form.hasClass('is-readonly');
+            $form.find('input,textarea').prop('disabled', isReadonly);
+        });
+    });
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function updateFirstName() {
+        fetch($('#first_name').attr('action'), {
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify({'first_name':$('#first_name_input').val()}),
+            headers: new Headers({
+                'X-CSRFToken': csrftoken,
+            })
+        })
+    }
+
+    function updateLastName() {
+        fetch($('#last_name').attr('action'), {
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify({'last_name':$('#last_name_input').val()}),
+            headers: new Headers({
+                'X-CSRFToken': csrftoken,
+            })
+        })
+    }
+
+</script>
+{% endblock %}

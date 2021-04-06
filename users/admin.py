@@ -21,8 +21,8 @@ class CustomUserAdmin(UserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': ('phone_number', 'password1', 'password2', 'is_staff',
-                        'first_name', 'last_name', 'birthday')}
-        ),
+                       'first_name', 'last_name', 'birthday')
+        }),
     )
     search_fields = ('phone_number',)
     ordering = ('date_joined',)
