@@ -1,10 +1,11 @@
 import json
-
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView, FormView
+from django.views.generic import (
+    CreateView, DetailView,
+)
 from django.contrib.auth import get_user_model
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 
 from .forms import CustomUserCreationForm
 
@@ -79,13 +80,6 @@ class UserPasswordUpdate(PasswordChangeView):
     success_url = reverse_lazy('password-change-done')
 
 
-def update_phone_number(request):
-    if request.method == "PUT":
-        print('Put was sent!')
-        print(request)
-    pass
-
-
 class UpdatePhoneNumberView(CreateView):
     model = User
     success_url = reverse_lazy('home')
@@ -98,13 +92,3 @@ class UpdatePhoneNumberView(CreateView):
         user.phone_number = new_phone_number
         user.save()
         return HttpResponseRedirect('/')
-
-
-# class UpdatePhoneNumberViewAbc(UpdateView):
-#     model = User
-#     fields = ('phone_number',)
-#     template_name = 'users/phone_number_change.html'
-#     success_url = reverse_lazy('phone-number-change-done')
-#
-#     def post(self, request, *args, **kwargs):
-#         print('hello from update view post')

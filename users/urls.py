@@ -1,5 +1,6 @@
-from django.contrib.auth.views import LoginView, PasswordChangeView, \
-    PasswordChangeDoneView
+from django.contrib.auth.views import (
+    LoginView, PasswordChangeDoneView,
+)
 from django.urls import path
 from django.views.generic import TemplateView
 
@@ -23,8 +24,6 @@ urlpatterns = [
     path('phone-number-change-done/', TemplateView.as_view(
         template_name='users/phone_number_change_done.html'),
          name='phone-number-change-done'),
-    # path('phone-number_change-abc/<int:pk>/', UpdatePhoneNumberViewAbc.as_view(),
-    #      name='phone-number-change-abc'),
     path('phone-number-change/', UpdatePhoneNumberView.as_view(),
          name='phone-number-change'),
 ]
