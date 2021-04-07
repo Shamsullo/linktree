@@ -33,8 +33,9 @@ ui.start('#firebaseui-auth-container', {
         }
     },
 
-    // signInSuccessUrl: $('#firebaseui-auth-container').attr('data-url3'),
-    signInSuccessUrl: '/users/phone-number-change-done/',
+    signInSuccessUrl: $('#firebaseui-auth-container').attr('data-url3'),
+    //The hard code is here for testing purposes, will remove it later
+    // signInSuccessUrl: '/users/phone-number-change-done/',
     signInOptions: [
         {
             provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,

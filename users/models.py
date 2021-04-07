@@ -9,7 +9,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
     username = None
     phone_number = models.CharField(_('phone_number'), max_length= 30, unique=True)
-    birthday = models.DateField(null=True, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
