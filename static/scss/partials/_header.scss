@@ -1,0 +1,63 @@
+.header {
+  height: 72px;
+  background: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.11);
+
+  @include MQ(phone) {
+    height: 44px;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+  .logo {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: 0.41em;
+    color: #374257;
+    text-decoration: none;
+    display: block;
+
+    @include MQ(phone) {
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+
+  .header__right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .profile__text {
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+
+    @include MQ(phone) {
+      display: none;
+    }
+  }
+
+  .profile__icon {
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

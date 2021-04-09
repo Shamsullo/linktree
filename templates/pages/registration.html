@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+
+    <div class="box__wrap">
+        <div class="form__box">
+            <form action="">
+                <div class="form__box-head">
+                    <h2 class="form__title">
+                        Регистрация
+                    </h2>
+                </div>
+                <label class="form__input-wrap">
+                    <input type="text" class="form__input" placeholder="Имя" required>
+                </label>
+                <label class="form__input-wrap">
+                    <input type="text" class="form__input" placeholder="Фамилия" required>
+                </label>
+                <label class="form__input-wrap form__password-input-wrap">
+                    <input type="password" class="form__input" placeholder="Придумайте пароль" required>
+                    <div class="form__eye"></div>
+                </label>
+                <label class="form__input-wrap form__password-input-wrap">
+                    <input type="password" class="form__input" placeholder="Повторите пароль" required>
+                    <div class="form__eye"></div>
+                </label>
+                <button class="form__btn" type="submit">
+                    Зарегистрироваться
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="success__notification">
+        Регистрация прошла успешно
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

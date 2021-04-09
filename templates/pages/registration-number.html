@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+
+    <div class="box__wrap">
+        <div class="form__box">
+            <form action="">
+                <div class="form__box-head">
+                    <h2 class="form__title">
+                        Для продолжения, введите номер телефона
+                    </h2>
+                </div>
+                <label class="form__input-wrap">
+                    <input type="text" class="form__input form__input-tel" required>
+                </label>
+                <button class="form__btn" type="submit">
+                    Отправить код
+                </button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}{% endblock %}

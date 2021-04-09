@@ -1,0 +1,99 @@
+.check__number {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 20px;
+
+  .profile__icon {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .check__number-number {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    color: #374257;
+  }
+
+  .wrong__number {
+    font-size: 14px;
+    line-height: 150%;
+    color: #505ED4;
+    text-decoration: none;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: #505ED4;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+}
+
+.no__sms {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #374257;
+  display: block;
+  text-align: center;
+  margin: 12px 0;
+  text-decoration: none;
+}
+
+.sms__timer {
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #CBCBCB;
+  padding: 14px;
+  border: 1px solid #DFDFDF;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.03));
+  border-radius: 4px;
+  transition: .2s;
+  display: block;
+  width: 100%;
+  background: transparent;
+
+  &.active {
+    color: #374257;
+
+    &:hover {
+      border-color: #969EE5;
+    }
+  }
+}
+
+main {
+  position: relative;
+}
+
+.success__notification {
+  padding: 15px 40px 15px 20px;
+  background: #27AE60;
+  border-radius: 6px 0 0 6px;
+  display: inline-block;
+  color: #FFFFFF;
+  position: absolute;
+  right: 0;
+  top: 24px;
+  transform: scale(0);
+  transform-origin: right center;
+  transition: .3s;
+
+  &.active {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,20 @@
+.form__sign-out {
+  border: 1px solid #F1F1F1;
+  border-radius: 6px;
+  padding: 7px 17px;
+}
+
+.change__filed {
+  display: block;
+  text-decoration: none;
+  margin-top: 12px;
+  text-align: center;
+  color: #374257;
+  border-color: #F1F1F1;
+  border-radius: 6px;
+  transition: .2s;
+
+  &:hover{
+    border-color: #505ED4;
+  }
+}

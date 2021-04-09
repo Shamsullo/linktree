@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+
+    <div class="box__wrap">
+        <div class="form__box">
+            <form action="">
+                <div class="form__box-head">
+                    <h2 class="form__title">
+                        Подтверждение номера
+                        телефона
+                    </h2>
+                </div>
+                <div class="check__number">
+                    <div class="profile__icon">
+                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M36.0994 36.4314C35.1498 33.7735 33.0574 31.4248 30.1467 29.7497C27.2359 28.0746 23.6696 27.1666 20.0007 27.1666C16.3318 27.1666 12.7654 28.0746 9.85463 29.7497C6.94389 31.4248 4.85147 33.7735 3.90189 36.4314"
+                                  stroke="#979797" stroke-width="3" stroke-linecap="round"/>
+                            <ellipse cx="19.9993" cy="13.8333" rx="8.33333" ry="8.33333" stroke="#979797"
+                                     stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="check__number-number">
+                            +996 700 12 34 56
+                        </p>
+                        <a href="#" class="wrong__number">
+                            Неверный номер телефона?
+                        </a>
+                    </div>
+                </div>
+                <label class="form__input-wrap">
+                    <input type="text" class="form__input" placeholder="Введите код подтверждения" required>
+                </label>
+                <button class="form__btn" type="submit">
+                    Подтвердить
+                </button>
+                <a href="" class="no__sms">
+                    Не пришло SMS сообщение?
+                </a>
+                <button class="sms__timer" type="submit" disabled>
+                    Отправить снова через 0:<span class="timer__seconds">59</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}{% endblock %}

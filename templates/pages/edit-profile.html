@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+
+    <div class="box__wrap">
+        <div class="form__box">
+            <form action="">
+                <div class="form__box-head">
+                    <h2 class="form__title">
+                        Профиль
+                    </h2>
+                    <a href="#" class="form__reg form__sign-out">
+                        Выход
+                    </a>
+                </div>
+                <label class="form__input-wrap">
+                    <input type="text" class="form__input" placeholder="Введите новое имя" required>
+                </label>
+                <label class="form__input-wrap">
+                    <input type="text" class="form__input" placeholder="Введите новую фамилию" required>
+                </label>
+                <button class="form__btn" type="submit">
+                    Сохранить изменения
+                </button>
+                <a href="#" class="sms__timer change__filed">
+                    Сменить пароль
+                </a>
+                <a href="#" class="sms__timer change__filed">
+                    Сменить номер
+                </a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}{% endblock %}
