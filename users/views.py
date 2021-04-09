@@ -1,8 +1,8 @@
 import json
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, LoginView
 from django.urls import reverse_lazy
 from django.views.generic import (
-    CreateView, DetailView,
+    CreateView, DetailView, TemplateView,
 )
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
@@ -26,7 +26,6 @@ class SignUpFormView(CreateView):
         phone = self.request.session.get('phone_number')
         user.phone_number = phone
         user.save()
-
         return HttpResponseRedirect('/')
 
 
@@ -92,3 +91,8 @@ class UpdatePhoneNumberView(CreateView):
         user.phone_number = new_phone_number
         user.save()
         return HttpResponseRedirect('/')
+
+
+class SignUpView(LoginView):
+    # form_class =
+    pass
