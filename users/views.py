@@ -2,12 +2,11 @@ import json
 from django.contrib.auth.views import PasswordChangeView, LoginView
 from django.urls import reverse_lazy
 from django.views.generic import (
-    CreateView, DetailView, TemplateView,
+    CreateView, DetailView, TemplateView, FormView,
 )
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
-
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UserPhoneNumberForm
 
 User = get_user_model()
 
@@ -93,6 +92,15 @@ class UpdatePhoneNumberView(CreateView):
         return HttpResponseRedirect('/')
 
 
-class SignUpView(LoginView):
-    # form_class =
-    pass
+class SigInView(LoginView):
+    template_name = 'pages/sign-in.html'
+
+
+class RegistrationNumberView(FormView):
+    template_name = 'pages/registration-number.html'
+    form_class = UserPhoneNumberForm
+    success_url = reverse_lazy('registration-submit_page')
+
+
+class RegistrationSubmitView(TemplateView):
+    template_name = 'pages/registration-submit.html'

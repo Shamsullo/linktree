@@ -11,16 +11,20 @@
 
     <div class="box__wrap">
         <div class="form__box">
-            <form action="">
+            <form id="myForm" action="" method="POST">
+                {% csrf_token %}
                 <div class="form__box-head">
                     <h2 class="form__title">
                         Для продолжения, введите номер телефона
                     </h2>
                 </div>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input form__input-tel" required>
+                    <input name = "phone_number" id="id_phone_number" type="text" class="form__input form__input-tel" required>
                 </label>
-                <button class="form__btn" type="submit">
+                <span style="color: red">
+                    {{form.phone_number.errors}}
+                </span>
+                <button class="form__btn" type="button" onclick="processForm()">
                     Отправить код
                 </button>
             </form>
@@ -29,4 +33,14 @@
 
 {% endblock %}
 
-{% block scripts %}{% endblock %}
+{% block scripts %}
+<script>
+    function processForm() {
+        let country_code = document.getElementsByClassName('iti__selected-dial-code')
+        let number = document.getElementById('id_phone_number')
+        phoneNumber = document.getElementById('id_phone_number').value = country_code['0'].innerHTML + number.value.replace(/\s+/g, '')
+        sessionStorage.setItem('phone_number', phoneNumber);
+        $("#myForm").submit()
+    }
+</script>
+{% endblock %}

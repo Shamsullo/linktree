@@ -24,7 +24,7 @@ class CustomUserAdmin(UserAdmin):
                        'first_name', 'last_name', 'birthdate')
         }),
     )
-    search_fields = ('phone_number',)
+    search_fields = ('phone_number', 'first_name', 'last_name')
     ordering = ('date_joined',)
 
 
