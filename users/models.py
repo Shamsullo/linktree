@@ -44,4 +44,4 @@ class CustomUser(PermissionsMixin, AbstractBaseUser):
         return self.phone_number
 
     def get_absolute_url(self):
-        return reverse("profile", kwargs={"pk": self.pk})
+        return reverse("edit-profile", kwargs={"pk": self.pk})

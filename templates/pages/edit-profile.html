@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title_page %}{% endblock %}
+{% block title_page %}Change Password{% endblock %}
 
 {% block style-libs %}{% endblock %}
 
@@ -11,28 +11,29 @@
 
     <div class="box__wrap">
         <div class="form__box">
-            <form action="">
+            <form action="" method="post">
+                {% csrf_token %}
                 <div class="form__box-head">
                     <h2 class="form__title">
                         Профиль
                     </h2>
-                    <a href="#" class="form__reg form__sign-out">
+                    <a href="{% url 'logout' %}" class="form__reg form__sign-out">
                         Выход
                     </a>
                 </div>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input" placeholder="Введите новое имя" required>
+                    <input type="text" name="first_name" id="id_first_name" class="form__input" placeholder="Введите новое имя" value="{{data.first_name}}" required>
                 </label>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input" placeholder="Введите новую фамилию" required>
+                    <input type="text" name="last_name" id="id_last_name" class="form__input" placeholder="Введите новую фамилию" value="{{data.last_name}}" required>
                 </label>
                 <button class="form__btn" type="submit">
                     Сохранить изменения
                 </button>
-                <a href="#" class="sms__timer change__filed">
+                <a href="{% url 'password-change' %}"class="sms__timer change__filed">
                     Сменить пароль
                 </a>
-                <a href="#" class="sms__timer change__filed">
+                <a href="{% url 'change-num_page' %}" class="sms__timer change__filed">
                     Сменить номер
                 </a>
             </form>

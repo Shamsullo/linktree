@@ -1,34 +1,38 @@
-from django.contrib.auth.views import (
-    PasswordChangeDoneView,
-)
+from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import path
 from django.views.generic import TemplateView
-
 from .views import (
-    SignUpFormView, ProfileViewClass, UserPasswordUpdate, update_first_name,
-    update_last_name, already_exist, UpdatePhoneNumberView, SigInView,
-    RegistrationNumberView, RegistrationSubmitView,
+    UserPasswordUpdate, RegistrationNumberView, RegistrationSubmitView,
+    UserRegistrationsView, EditProfileView, UserPasswordUpdateDone,
+    ChangeNumberView, ChangeNumberSubmitView, SetNewPasswordView,
+    ResetPasswordNumberView, ResetPasswordNumberSubmitView,
 )
 
 urlpatterns = [
-    path('registration-number/', RegistrationNumberView.as_view(), name='reg-number_page'),
+    path('registration-number/', RegistrationNumberView.as_view(),
+         name='reg-number_page'),
     path('registration-submit/', RegistrationSubmitView.as_view(),
          name='registration-submit_page'),
-    path('registration', TemplateView.as_view(
-        template_name='page/registration.html'), name='reg_page'),
-    path('signup/', SignUpFormView.as_view(), name='signup'),
-    path('already-exist/', already_exist, name='check_for_existence'),
-    path('login/', SigInView.as_view(), name='login'),
-    path('profile/<int:pk>/', ProfileViewClass.as_view(), name='profile'),
-    path('first-name-update/', update_first_name, name='first_name_update'),
-    path('last-name-update/', update_last_name, name='last_name_update'),
-    path('pasword-change/', UserPasswordUpdate.as_view(), name='password-change'),
-    path('password-change-done/', PasswordChangeDoneView.as_view(
-        template_name='users/password_update_done.html'),
+    path('registration/', UserRegistrationsView.as_view(), name='reg_page'),
+    path('login/', LoginView.as_view(template_name='pages/sign-in.html'),
+         name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('edit-profile/<int:pk>/', EditProfileView.as_view(),
+         name='edit-profile'),
+    path('pasword-change/', UserPasswordUpdate.as_view(),
+         name='password-change'),
+    path('password-change-done/', UserPasswordUpdateDone.as_view(),
          name='password-change-done'),
-    path('phone-number-change-done/', TemplateView.as_view(
-        template_name='users/phone_number_change_done.html'),
-         name='phone-number-change-done'),
-    path('phone-number-change/', UpdatePhoneNumberView.as_view(),
-         name='phone-number-change'),
+    path('change-number/', ChangeNumberView.as_view(), name='change-num_page'),
+    path('change-number-submit/', ChangeNumberSubmitView.as_view(),
+         name='change-num-submit_page'),
+    path('reseet-password-number/', ResetPasswordNumberView.as_view(),
+         name='reset-password-num_page'),
+    path('reset-password-number-submit/', ResetPasswordNumberSubmitView.as_view(),
+         name='reset-password-num-submit_page'),
+    path('reset-password/', SetNewPasswordView.as_view(),
+         name='reset-password_page'),
+    path('reset-password-done/', TemplateView.as_view(
+        template_name='pages/password-reset-done.html'),
+         name='password-reset-done')
 ]
