@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}Welcome{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div>
+    <h2>Welcome to Taplik. Now you can go to your profile or Link Board</h2>
+    <a class="btn-success" href="{{ user.get_absolute_url }}"> Мой профиль |</a>
+    <a class="btn-success" href="{% url 'add-or-update-board-data' user.pk %}"> Мои ссылки</a>
+</div>
+{% else %}
+<div>
+    <h2>You are not authenticated. Please login or register in order to see or create your links board</h2>
+    <a class="btn-success" href="{% url 'login' %}">Войти |</a>
+    <a class="btn-success" href="{% url 'reg-number_page' %}"> Регистрация</a>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}{% endblock %}

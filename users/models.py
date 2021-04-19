@@ -8,6 +8,7 @@ from .managers import CustomUserManager
 
 
 class CustomUser(PermissionsMixin, AbstractBaseUser):
+    """Customized user model for our project"""
     phone_number = models.CharField(_('phone number'), max_length=30, unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)

@@ -15,17 +15,20 @@
                     <h4 class="taplink__title">
                         Ссылка на ваш Таплинк
                     </h4>
-                    <p class="taplink__click">
-                        Для получения ссылки нажмите “Установить”
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M17.5858 13.0001H4C3.44772 13.0001 3 12.5524 3 12.0001C3 11.4478 3.44772 11.0001 4 11.0001H17.5858L12 5.41429C11.6095 5.02376 11.6095 4.3906 12 4.00008C12.3905 3.60955 13.0237 3.60955 13.4142 4.00008L20.7071 11.293C21.0976 11.6835 21.0976 12.3167 20.7071 12.7072L13.4142 20.0001C13.0237 20.3906 12.3905 20.3906 12 20.0001C11.6095 19.6096 11.6095 18.9764 12 18.5859L17.5858 13.0001Z"
-                                  fill="#374257"/>
-                        </svg>
-                    </p>
-{#                    <a href="#" class="taplink__link" id="taplink-link" target="_blank">#}
-{#                        https://taplink.cc/_gratia__#}
-{#                    </a>#}
+                    {% if board.public_link %}
+                        <a href="#" class="taplink__link" id="taplink-link" target="_blank">
+                            {{request.get_host}}/{{ board.public_link }}
+                        </a>
+                    {% else %}
+                        <p class="taplink__click">
+                            Для получения ссылки нажмите “Установить”
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M17.5858 13.0001H4C3.44772 13.0001 3 12.5524 3 12.0001C3 11.4478 3.44772 11.0001 4 11.0001H17.5858L12 5.41429C11.6095 5.02376 11.6095 4.3906 12 4.00008C12.3905 3.60955 13.0237 3.60955 13.4142 4.00008L20.7071 11.293C21.0976 11.6835 21.0976 12.3167 20.7071 12.7072L13.4142 20.0001C13.0237 20.3906 12.3905 20.3906 12 20.0001C11.6095 19.6096 11.6095 18.9764 12 18.5859L17.5858 13.0001Z"
+                                      fill="#374257"/>
+                            </svg>
+                        </p>
+                    {% endif %}
                     <div class="taplink__copy">
                     <span>
                         Ссылка успешно скопирована
@@ -68,29 +71,23 @@
             <div class="taplink__box">
                 <div class="taplink__box-content">
                     <div class="taplink__img">
-                        <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        <img src="{% if board.avatar %}{{ object.avatar.url }}{% else %}{% static 'img/jpg/868-536x354.jp' %}{% endif %}">
                     </div>
                     <div class="taplink__text">
                         <h5>
-                            Заголовок
+                            {{ board.title }}
                         </h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-                            ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-                            consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                            arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu
-                            pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-                            vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
-                            enim.
+                            {{ board.bio|safe}}
                         </p>
                     </div>
                     <div class="taplink__contacts">
                         <h5>
-                            Свяжитесь с нами:
+                            {{board.links_title}}:
                         </h5>
                         <div class="taplink__social-media">
-                            <a href="#" class="taplink__social-link taplink__telegram">
+                            {% if social_media.telegram %}
+                            <a href="https://t.me/{{ social_media.telegram }}" class="taplink__social-link taplink__telegram" target="_blank">
                                 Телеграм
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +101,9 @@
                                           fill="#D6E2EA"/>
                                 </svg>
                             </a>
-                            <a href="#" class="taplink__social-link taplink__whatsapp">
+                            {% endif %}
+                            {% if social_media.whatsapp %}
+                            <a href="https://wa.me/{{ social_media.whatsapp }}" class="taplink__social-link taplink__whatsapp" target="_blank">
                                 WhatsApp
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -116,6 +115,7 @@
                                           fill="white"/>
                                 </svg>
                             </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -212,7 +212,8 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action>
+                <form action="{{ board.get_absolute_url }}" method="post" enctype="multipart/form-data">
+                    {% csrf_token%}
                     <div class="controll__block">
                         <div class="controll__block-head">
                             <h5>
@@ -224,9 +225,10 @@
                         </div>
                         <div class="modal__avatar-flex">
                             <div class="modal__avatar-flex-itm">
-                                <img src="{% static 'img/jpg/868-536x354.jpg' %}" class="profile-pic" alt="">
+                                <img src="{% if object.avatar %}{{ object.avatar.url }}{% else %}{% static 'img/jpg/868-536x354.jpg' %}{% endif %}"
+                                     class="profile-pic" alt="">
                             </div>
-                            <input class="file-upload" type="file" accept="image/*" id="avatar__btn">
+                            <input name="avatar" class="file-upload" type="file" accept="image/*" id="avatar__btn">
                             <label for="avatar__btn" class="avatar__upload">
                                 <div class="modal__avatar-icon">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -259,7 +261,8 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action="">
+                <form action="{% url 'add-social-links' %}", method="post" id="social_media_form">
+                    {% csrf_token %}
                     <div class="controll__block">
                         <div class="controll__block-head">
                             <h5>
@@ -274,16 +277,16 @@
                                 <label class="messenger__fields-ttl">
                                     WhatsApp
                                 </label>
-                                <input type="text" class="form__input-tel messenger__input">
+                                <input name="whatsapp", id="id_whatsapp" type="text" class="form__input-tel messenger__input">
                             </div>
                             <div>
                                 <label class="messenger__fields-ttl">
                                     Telegram
                                 </label>
-                                <input type="text" class="form__input-tel messenger__input">
+                                <input name="telegram" id="id_telegram" type="text" placeholder="username" class="messenger__input">
                             </div>
                         </div>
-                        <button type="submit" class="modal__avatar-save">
+                        <button type="button" onclick="addCodeAndSend()" class="modal__avatar-save">
                             Добавить блок
                         </button>
                     </div>
@@ -295,19 +298,22 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action="">
+                <form action="{{ board.get_absolute_url }}", method="post" id="bio_form_id">
+                    {% csrf_token %}
                     <div class="controll__block">
+<!--                        {{ board.bio }}-->
                         <div class="controll__block-head">
                             <h5>
                                 Текст
                             </h5>
                             <div class="controll__block-close" aria-label="Close modal"
                                  data-micromodal-close>
+                                <input type="text" id="id_bio" name="bio", hidden>
                             </div>
                         </div>
                         <div id="editor">
                         </div>
-                        <button type="submit" class="modal__avatar-save">
+                        <button type="button" class="modal__avatar-save" onclick="getTextFieldAndSubmit()">
                             Добавить блок
                         </button>
                     </div>
@@ -319,7 +325,8 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action="">
+                <form action="{{ board.get_absolute_url }}", method="post">
+                    {% csrf_token %}
                     <div class="controll__block">
                         <div class="controll__block-head">
                             <h5>
@@ -329,11 +336,13 @@
                                  data-micromodal-close>
                             </div>
                         </div>
-                        <input type="text" class="controll__input"
-                               placeholder="Установите желаемую ссылку например: HelloWorld">
-{#                        <p class="link__error">#}
-{#                            К сожалению данная ссылка уже занята#}
-{#                        </p>#}
+                        <input name="public_link" type="text" class="controll__input"
+                               placeholder="Установите желаемую ссылку например: HelloWorld",
+                            {% if board.public_link %} value="{{board.public_link}}" {% endif %}}
+                        >
+                        <p class="link__error">
+                           {{board.non_field_errors}}
+                        </p>
                         <button type="submit" class="modal__avatar-save controll__btn">
                             Сохранить
                         </button>
@@ -346,6 +355,25 @@
 
 {% block scripts %}
     <script>
+        function addCodeAndSend() {
+            let countryCode = document.getElementsByClassName('iti__selected-dial-code')
+            let phoneNumber = document.getElementById('id_whatsapp')
+            let telegram = document.getElementById('id_telegram').value
+            if (phoneNumber.value){
+                phoneNumber = countryCode['0'].innerHTML + phoneNumber.value
+                document.getElementById('id_whatsapp').value = phoneNumber.replace(/\s+/g, '')}
+            if (telegram.value){
+                document.getElementById('id_telegram').value = telegram.replace('@', '')
+            }
+            document.getElementById('social_media_form').submit()
+        }
+
+        function getTextFieldAndSubmit(){
+            let elements = document.getElementsByClassName('ql-editor')['0'].children['0'];
+            document.getElementById('id_bio').value = elements.outerHTML
+            document.getElementById('bio_form_id').submit()
+        }
+
         $(document).ready(function () {
 
             var readURL = function (input) {
