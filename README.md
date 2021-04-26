@@ -16,3 +16,8 @@ User will register to the site using their phone number be sms-code verification
 
 #### Board that will be shared
 <img width="1440" alt="Screen Shot 2021-04-26 at 15 26 48" src="https://user-images.githubusercontent.com/34841262/116062221-88cec900-a6a5-11eb-90d0-bb794be85ff2.png">
+
+
+## Usage and contribution
+Feel free to use the code for any of your project:)
+Any idea for develpment or any pease of code implementing the project would be higly appriciated. 
