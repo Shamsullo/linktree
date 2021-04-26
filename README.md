@@ -10,5 +10,9 @@ And this is how this project get started, in my free times I come down to this p
 User will register to the site using their phone number be sms-code verification. They can create their board of links (business card), add the desired link and their board is ready to be shared. they just need to copy the created link and share wherever is needed.  Users also are able to update their profile infomation, phone number, password and restore thir password when they don't remember it. 
 
 ### Some screenshots of the already implemented parts 
-(https://drive.google.com/file/d/1H-JzJ3_vvPT1vMFgLcPRoujxOSQP5sa9/view?usp=sharing)
-[Board link page](https://drive.google.com/file/d/1606WDVFNcoWhNDBxoa-9564lIKyCbu8b/view?usp=sharing)
+
+#### Loing page
+<img width="1440" alt="Screen Shot 2021-04-26 at 15 26 14" src="https://user-images.githubusercontent.com/34841262/116062142-7785bc80-a6a5-11eb-837e-e5aa16d66948.png">
+
+#### Board that will be shared
+<img width="1440" alt="Screen Shot 2021-04-26 at 15 26 48" src="https://user-images.githubusercontent.com/34841262/116062221-88cec900-a6a5-11eb-90d0-bb794be85ff2.png">
