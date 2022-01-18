@@ -11,7 +11,7 @@ User will register to the site using their phone number be sms-code verification
 
 ### Some screenshots of the already implemented parts 
 
-#### Loing page
+#### Lonig page
 <img width="1440" alt="Screen Shot 2021-04-26 at 15 26 14" src="https://user-images.githubusercontent.com/34841262/116062142-7785bc80-a6a5-11eb-837e-e5aa16d66948.png">
 
 #### Board that will be shared
@@ -20,4 +20,4 @@ User will register to the site using their phone number be sms-code verification
 
 ## Usage and contribution
 Feel free to use the code for any of your project:)
-Any idea for develpment or any pease of code implementing the project would be higly appriciated. 
+Any idea for develpment or any piece of code implementing/improvement of project would be higly appriciated. 
